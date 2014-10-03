@@ -4,7 +4,9 @@
   "description": "Fast HTML parser. Based on ashi009's fast-html-parser.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "npm run test-spec && npm run test-optimized",
+    "test-spec": "./node_modules/.bin/mocha test/test-*.js",
+    "test-optimized": "node --trace_opt --trace_deopt --allow-natives-syntax test/optimized.js"
   },
   "author": {
     "name": "DOM2WG",
