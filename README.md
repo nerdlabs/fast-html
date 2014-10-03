@@ -1,4 +1,4 @@
-# FastHTML [![Build Status][3]][4]
+# FastHTML [![Build Status][3]][4] [![Coverage Status][5]][6]
 FastHTML is a single-purpose HTML parser focused on performance.
 Based upon [node-fast-html-parser][0] by [ashi009][1]
 
@@ -57,3 +57,5 @@ console.log('Coming soon.');
 [2]: https://github.com/AndreasMadsen/htmlparser-benchmark
 [3]: https://travis-ci.org/nerdlabs/fastHTML.svg?branch=master
 [4]: https://travis-ci.org/nerdlabs/fastHTML
+[5]: https://img.shields.io/coveralls/nerdlabs/fastHTML.svg
+[6]: https://coveralls.io/r/nerdlabs/fastHTML
