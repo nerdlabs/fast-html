@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npm run test-spec && npm run test-optimized && npm run test-benchmark",
     "test-spec": "./node_modules/.bin/mocha test/test-*.js",
+    "test-doc": "./node_modules/.bin/mocha -R doc test/test-*.js | cat docs/_begin.html - docs/_end.html > docs/test.html",
     "test-optimized": "node --trace_opt --trace_deopt --allow-natives-syntax test/optimized.js",
     "test-benchmark": "node test/benchmark.js"
   },
