@@ -1,31 +1,6 @@
 var parse = require('../').parse;
-
-
-function TextNode(value) {
-    this.rawText = value;
-}
-
-function HTMLElement(name, attributes) {
-    this.tagName = name;
-    this.attributes = attributes;
-    this.childNodes = [];
-    if (attributes.id) {
-        this.id = attributes.id;
-    }
-}
-HTMLElement.prototype.appendChild = function (node) {
-    this.childNodes.push(node);
-    return node;
-};
-
-
-function createElement(tagName, attributes) {
-    return new HTMLElement(tagName, attributes);
-}
-
-function createTextNode(textContent) {
-    return new TextNode(textContent);
-}
+var createElement = require('./lib/createElementNode');
+var createTextNode = require('./lib/createTextNode');
 
 var optimizationStatusMessages = [
     'undefined behaviour',

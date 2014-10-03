@@ -4,9 +4,10 @@
   "description": "Fast HTML parser. Based on ashi009's fast-html-parser.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "npm run test-spec && npm run test-optimized",
+    "test": "npm run test-spec && npm run test-optimized && npm run test-benchmark",
     "test-spec": "./node_modules/.bin/mocha test/test-*.js",
-    "test-optimized": "node --trace_opt --trace_deopt --allow-natives-syntax test/optimized.js"
+    "test-optimized": "node --trace_opt --trace_deopt --allow-natives-syntax test/optimized.js",
+    "test-benchmark": "node test/benchmark.js"
   },
   "author": {
     "name": "DOM2WG",
@@ -24,8 +25,9 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "mocha": "~1.21.4",
     "chai": "~1.9.2",
+    "htmlparser-benchmark": "git://github.com/AndreasMadsen/htmlparser-benchmark",
+    "mocha": "~1.21.4",
     "sinon": "~1.10.3"
   }
 }
