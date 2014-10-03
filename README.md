@@ -1,4 +1,4 @@
-# FastHTML 
+# FastHTML
 FastHTML is a single-purpose HTML parser focused on performance.
 
 
@@ -27,7 +27,7 @@ var root = HTMLParser.parse('<ul id="list"><li>Hello World</li></ul>');
 #### parse(HTMLString, elementNodeConstructor, textNodeConstructor)
 
 * `HTMLString` - HTML `string` to parse
-* `elementNodeConstructor` - `function` returning an `ElementNode` 
+* `elementNodeConstructor` - `function` returning an `ElementNode`
 * `textNodeConstructor` - `function` returning a `TextNode`
 
 #### elementNodeFactory(tagName, attributes)
@@ -43,7 +43,7 @@ var root = HTMLParser.parse('<ul id="list"><li>Hello World</li></ul>');
 
 #### ElementNode
 #### appendChild(Node)
-* `Node` - `ElementNode` or `TextNode` to insert into 
+* `Node` - `ElementNode` or `TextNode` to append
 
 ### Example implementation
 
