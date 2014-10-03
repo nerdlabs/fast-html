@@ -1,5 +1,6 @@
 # FastHTML
 FastHTML is a single-purpose HTML parser focused on performance.
+Based upon [node-fast-html-parser][0] by [ashi009][1]
 
 
 ## Install
@@ -12,7 +13,7 @@ npm publish is on the way.
 
 ## Performance
 
-Tests via [htmlparser-benchmark](https://github.com/AndreasMadsen/htmlparser-benchmark) are on the way.
+Tests via [htmlparser-benchmark][2] are on the way.
 
 ## Usage
 
@@ -50,3 +51,7 @@ var root = HTMLParser.parse('<ul id="list"><li>Hello World</li></ul>');
 ```js
 console.log('Coming soon.');
 ```
+
+[0]: https://github.com/ashi009/node-fast-html-parser
+[1]: https://github.com/ashi009
+[2]: https://github.com/AndreasMadsen/htmlparser-benchmark
