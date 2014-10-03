@@ -1,31 +1,24 @@
 {
-  "name": "fast-html-parser",
-  "version": "1.0.0",
-  "description": "A very fast HTML parser, generating a simplified DOM, with basic element query support.",
-  "main": "index.js",
+  "name": "fastHTML",
+  "version": "0.0.1",
+  "description": "Fast HTML parser. Based on ashi009's fast-html-parser.",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "mocha",
-    "posttest": "mocha -R travis-cov",
-    "coverage": "mocha -R html-cov > coverage.html"
+    "test": "./node_modules/.bin/mocha"
   },
-  "author": "Xiaoyi Shi <ashi009@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "apollojs": "^1.3.0",
-    "entities": "^1.1.1"
+  "author": {
+    "name": "DOM2WG",
+    "email": "dom2wg@nerdlabs.it"
   },
-  "devDependencies": {
-    "mocha": "*",
-    "should": "*",
-    "blanket": "*",
-    "travis-cov": "*"
-  },
-  "config": {
-    "blanket": {
-      "pattern": "index.js"
+  "contributors": [
+    {
+      "name": "Bjoern Brauer",
+      "email": "zaubernerd@zaubernerd.de"
     },
-    "travis-cov": {
-      "threshold": 70
+    {
+      "name": "Mario Nebl",
+      "email": "hello@mario-nebl.de"
     }
-  }
+  ],
+  "license": "MIT"
 }
