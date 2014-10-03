@@ -19,7 +19,6 @@ bench.on('result', function (stat) {
 
     if (mean >= 4) {
         console.log('Meh, this is slow and you should feel bad.')
-        process.exit(1);
     }
 
     process.exit(0);
