@@ -20,5 +20,10 @@
       "email": "hello@mario-nebl.de"
     }
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "~1.21.4",
+    "chai": "~1.9.2",
+    "sinon": "~1.10.3"
+  }
 }
