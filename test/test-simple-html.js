@@ -1,6 +1,6 @@
 var assert = require('chai').assert;
 
-var parse = require('../').parse;
+var parse = require('../');
 var createElementNode = require('./lib/createElementNode');
 var createTextNode = require('./lib/createTextNode');
 

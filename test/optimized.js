@@ -1,4 +1,4 @@
-var parse = require('../').parse;
+var parse = require('../');
 var createElement = require('./lib/createElementNode');
 var createTextNode = require('./lib/createTextNode');
 
