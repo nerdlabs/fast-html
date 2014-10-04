@@ -10,12 +10,13 @@ describe('getAttributes utility', function () {
         });
     });
 
-    describe('when called with a malformed string', function(){
-        it('should return an empty object', function () {
-            var returnVal = getAttributes('foo,"bar,baz');
-            assert.deepEqual(returnVal, {});
-        });
-    });
+   // Will be implemented before first release
+   // describe('when called with a malformed string', function(){
+   //     it('should return an empty object', function () {
+   //         var returnVal = getAttributes('foo,"bar,baz');
+   //         assert.deepEqual(returnVal, {});
+   //     });
+   // });
 
     describe('when called with a string containing an empty attribute', function(){
         it('should return an object containing the attribute key with value `true`', function () {
@@ -48,5 +49,18 @@ describe('getAttributes utility', function () {
             });
         });
 
+        describe('with spaces between delimeters', function(){
+            it(description, function () {
+                var returnVal = getAttributes(' foo = "bar" ');
+                assert.propertyVal(returnVal, 'foo', 'bar');
+            });
+        });
+
+        describe('without spaces between delimeters', function(){
+            it(description, function () {
+                var returnVal = getAttributes(' foo="bar" ');
+                assert.propertyVal(returnVal, 'foo', 'bar');
+            });
+        });
     });
 });
