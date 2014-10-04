@@ -18,8 +18,8 @@ Tests via [htmlparser-benchmark][2] are on the way.
 ## Usage
 
 ```js
-var parser = require('fasthtml');
-var root = HTMLParser.parse('<ul id="list"><li>Hello World</li></ul>');
+var parse = require('fasthtml');
+var root = parse('<ul id="list"><li>Hello World</li></ul>');
 
 ```
 
