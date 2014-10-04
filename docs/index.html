@@ -1,0 +1,161 @@
+<!doctype html>
+<head>
+    <title>fastHTML documentation</title>
+</head>
+<body>
+    <section class="suite">
+      <h1>Basic usage</h1>
+      <dl>
+        <section class="suite">
+          <h1>when called without any arguments</h1>
+          <dl>
+            <dt>should return undefined</dt>
+            <dd><pre><code>var returnVal = parse();
+assert.equal(returnVal, undefined);</code></pre></dd>
+          </dl>
+        </section>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>Simple examples</h1>
+      <dl>
+        <section class="suite">
+          <h1>when called with empty string</h1>
+          <dl>
+            <dt>should return an empty root-node</dt>
+            <dd><pre><code>var returnVal = parse('', createElementNode, createTextNode);
+assert.equal(returnVal.tagName, null);
+assert.deepEqual(returnVal.attributes, {});
+assert.deepEqual(returnVal.childNodes, []);</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>when called with just one element</h1>
+          <dl>
+            <dt>should parse the string and return the element as childNode of root-node</dt>
+            <dd><pre><code>assert.equal(returnVal.childNodes.length, 1, 'create just one childNode');
+assert.equal(returnVal.childNodes[0].tagName, 'div');</code></pre></dd>
+            <dt>should have empty attributes and childNodes</dt>
+            <dd><pre><code>assert.deepEqual(returnVal.childNodes[0].attributes, {});
+assert.equal(returnVal.childNodes[0].childNodes.length, 0);</code></pre></dd>
+          </dl>
+        </section>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>camelCase utility</h1>
+      <dl>
+        <section class="suite">
+          <h1>when called with an empty string</h1>
+          <dl>
+            <dt>should return an empty string</dt>
+            <dd><pre><code>var returnVal = camelCase('');
+assert.equal(returnVal, '');</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>when called with a kebapcased string</h1>
+          <dl>
+            <section class="suite">
+              <h1>with one part</h1>
+              <dl>
+                <dt>should return the same string</dt>
+                <dd><pre><code>var returnVal = camelCase('kebap-');
+assert.equal(returnVal, 'kebap-');</code></pre></dd>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>with two parts</h1>
+              <dl>
+                <dt>should return a camelCased string</dt>
+                <dd><pre><code>var returnVal = camelCase('kebap-case-string');
+assert.equal(returnVal, 'kebapCaseString');</code></pre></dd>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>with n parts</h1>
+              <dl>
+                <dt>should return a camelCased string</dt>
+                <dd><pre><code>var returnVal = camelCase('kebap-case-string-kebap-case-string-kebap-case-string');
+assert.equal(returnVal, 'kebapCaseStringKebapCaseStringKebapCaseString');</code></pre></dd>
+              </dl>
+            </section>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>when called with a non-kepabcased string</h1>
+          <dl>
+            <dt>should return the same string</dt>
+            <dd><pre><code>var returnVal = camelCase('kebapcase');
+assert.equal(returnVal, 'kebapcase');</code></pre></dd>
+          </dl>
+        </section>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>getAttributes utility</h1>
+      <dl>
+        <section class="suite">
+          <h1>when called with an empty string</h1>
+          <dl>
+            <dt>should return an empty object</dt>
+            <dd><pre><code>var returnVal = getAttributes('');
+assert.deepEqual(returnVal, {});</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>when called with a string containing an empty attribute</h1>
+          <dl>
+            <dt>should return an object containing the attribute key with value `true`</dt>
+            <dd><pre><code>var returnVal = getAttributes('foo');
+assert.propertyVal(returnVal, 'foo', true);</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>when called with a string containing attributes</h1>
+          <dl>
+            <section class="suite">
+              <h1>without quotes</h1>
+              <dl>
+                <dt>should return an corresponding object</dt>
+                <dd><pre><code>var returnVal = getAttributes('foo=bar');
+assert.propertyVal(returnVal, 'foo', 'bar');</code></pre></dd>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>with single quotes</h1>
+              <dl>
+                <dt>should return an corresponding object</dt>
+                <dd><pre><code>var returnVal = getAttributes('foo=\'bar\'');
+assert.propertyVal(returnVal, 'foo', 'bar');</code></pre></dd>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>with double quotes</h1>
+              <dl>
+                <dt>should return an corresponding object</dt>
+                <dd><pre><code>var returnVal = getAttributes('foo=&quot;bar&quot;');
+assert.propertyVal(returnVal, 'foo', 'bar');</code></pre></dd>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>with spaces between delimeters</h1>
+              <dl>
+                <dt>should return an corresponding object</dt>
+                <dd><pre><code>var returnVal = getAttributes(' foo = &quot;bar&quot; ');
+assert.propertyVal(returnVal, 'foo', 'bar');</code></pre></dd>
+              </dl>
+            </section>
+            <section class="suite">
+              <h1>without spaces between delimeters</h1>
+              <dl>
+                <dt>should return an corresponding object</dt>
+                <dd><pre><code>var returnVal = getAttributes(' foo=&quot;bar&quot; ');
+assert.propertyVal(returnVal, 'foo', 'bar');</code></pre></dd>
+              </dl>
+            </section>
+          </dl>
+        </section>
+      </dl>
+    </section>
+</body>
