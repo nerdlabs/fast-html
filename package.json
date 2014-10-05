@@ -1,5 +1,5 @@
 {
-  "name": "fastHTML",
+  "name": "fasthtml",
   "version": "0.0.1",
   "description": "Fast HTML parser. Based on ashi009's fast-html-parser.",
   "main": "lib/index.js",
