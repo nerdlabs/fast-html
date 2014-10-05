@@ -1,5 +1,5 @@
 # FastHTML [![Build Status][3]][4] [![Coverage Status][5]][6]
-FastHTML is a single-purpose HTML parser focused on performance.
+FastHTML is a single-purpose HTML parser focused on performance. It only copes with sane HTML - see the [Things that break](#things-that-break) section.
 Based upon [node-fast-html-parser][0] by [ashi009][1]
 
 
@@ -77,6 +77,24 @@ var parse = require('fasthtml');
 var parsed = parse('<ul id="list"><li>Hello World</li></ul>', createElementNode, createTextNode);
 console.log(parsed);
 ```
+
+### Things that break
+FastHTML is designed for maximum performance, therefore it will not
+
+* Try to fix broken markup
+* Try to fix slightly broken markup
+* Try to do automagic closing stuff
+* Be graceful about unescaped HTML strings in inline `script`, `style` and HTML attributes
+
+#### Solutions
+##### `</script>` strings in inline `script`
+
+Use `<![CDATA[...]]>`.
+
+##### HTML strings in attributes
+
+Escape them.
+
 
 [0]: https://github.com/ashi009/node-fast-html-parser
 [1]: https://github.com/ashi009
