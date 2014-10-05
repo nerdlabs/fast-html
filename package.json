@@ -4,14 +4,13 @@
   "description": "Fast HTML parser. Based on ashi009's fast-html-parser.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "npm run test-spec && npm run test-optimized && npm run test-benchmark && npm run test-cover",
+    "test": "npm run test-spec && npm run test-optimized && npm run test-benchmark && npm run test-coverage",
     "test-spec": "./node_modules/.bin/mocha test/test-*.js",
     "test-doc": "./node_modules/.bin/mocha -R doc test/test-*.js | cat docs/_begin.html - docs/_end.html > docs/index.html",
     "test-optimized": "node --trace_opt --trace_deopt --allow-natives-syntax test/optimized.js",
     "test-benchmark": "node test/benchmark.js",
-    "istanbul": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly test/test-*.js",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "test-cover": "npm run istanbul && npm run coveralls && rm -rf ./coverage"
+    "test-coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly test/test-*.js",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "author": {
     "name": "DOM2WG",
