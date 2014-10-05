@@ -30,14 +30,54 @@ assert.deepEqual(returnVal.childNodes, []);</code></pre></dd>
           </dl>
         </section>
         <section class="suite">
+          <h1>when called with string containing only a comment</h1>
+          <dl>
+            <dt>should return an empty root-node</dt>
+            <dd><pre><code>var returnVal = parse('&lt;!-- foobar --&gt;', createElementNode, createTextNode);
+assert.equal(returnVal.tagName, null);
+assert.deepEqual(returnVal.attributes, {});
+assert.deepEqual(returnVal.childNodes, []);</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
           <h1>when called with just one element</h1>
           <dl>
             <dt>should parse the string and return the element as childNode of root-node</dt>
-            <dd><pre><code>assert.equal(returnVal.childNodes.length, 1, 'create just one childNode');
+            <dd><pre><code>assert.lengthOf(returnVal.childNodes, 1, 'create just one childNode');
 assert.equal(returnVal.childNodes[0].tagName, 'div');</code></pre></dd>
             <dt>should have empty attributes and childNodes</dt>
             <dd><pre><code>assert.deepEqual(returnVal.childNodes[0].attributes, {});
-assert.equal(returnVal.childNodes[0].childNodes.length, 0);</code></pre></dd>
+assert.lengthOf(returnVal.childNodes[0].childNodes, 0);</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>when called with just one element carrying attributes</h1>
+          <dl>
+            <dt>should have a corresponding attribute object</dt>
+            <dd><pre><code>var returnVal = parse('&lt;div bar=&quot;foo&quot; foo=&quot;bar&quot; foobar&gt;&lt;/div&gt;', createElementNode, createTextNode);
+assert.deepEqual(returnVal.childNodes[0].attributes, { 'foo': 'bar' , 'bar': 'foo', 'foobar': true });</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>when called with just one element containing text</h1>
+          <dl>
+            <dt>should return an element with one text childNode</dt>
+            <dd><pre><code>assert.lengthOf(returnVal.childNodes[0].childNodes, 1);
+assert.instanceOf(returnVal.childNodes[0].childNodes[0], TextNode);</code></pre></dd>
+            <dt>should return an element with one text childNode with corresponding contents</dt>
+            <dd><pre><code>assert.deepEqual(returnVal.childNodes[0].childNodes[0], new TextNode('foobar'));</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>when called with self-closing elements</h1>
+          <dl>
+            <dt>should return an element with the same number of childNodes</dt>
+            <dd><pre><code>assert.lengthOf(returnVal.childNodes, Object.keys(elements.selfClosing).length);</code></pre></dd>
+            <dt>should return an element with a childNode for each passed childNode</dt>
+            <dd><pre><code>var returnedTagNames = returnVal.childNodes.map(function(childNode){
+    return childNode.tagName;
+});
+assert.sameMembers(returnedTagNames, Object.keys(elements.selfClosing));</code></pre></dd>
           </dl>
         </section>
       </dl>
