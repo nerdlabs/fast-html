@@ -27,4 +27,8 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
+# Reserved for manual testing
+/_test/
+
+# Sublime workspace files
 *.sublime-*
