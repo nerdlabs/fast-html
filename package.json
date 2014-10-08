@@ -10,7 +10,8 @@
     "test-optimized": "node --trace_opt --trace_deopt --allow-natives-syntax test/optimized.js",
     "test-benchmark": "node test/benchmark.js",
     "test-coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly test/test-*.js",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "install-hooks": "cp ./hooks/* ./.git/hooks/"
   },
   "author": {
     "name": "DOM2WG",
