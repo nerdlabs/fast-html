@@ -1,0 +1,3 @@
+#!/bin/sh
+# Run npm test pre-commit
+exec npm test
