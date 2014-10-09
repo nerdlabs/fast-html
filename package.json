@@ -4,6 +4,7 @@
   "description": "Fast HTML parser. Based on ashi009's fast-html-parser.",
   "main": "lib/index.js",
   "scripts": {
+    "watch": "./node_modules/.bin/nodemon --exec \"npm run test-spec\"",
     "test": "npm run test-spec && npm run test-optimized && npm run test-benchmark && npm run test-coverage",
     "test-spec": "./node_modules/.bin/mocha test/test-*.js",
     "test-doc": "./node_modules/.bin/mocha -R doc test/test-*.js | cat docs/_begin.html - docs/_end.html > docs/index.html",
