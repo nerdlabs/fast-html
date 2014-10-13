@@ -12,7 +12,8 @@
     "test-benchmark": "node test/benchmark.js",
     "test-coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly test/test-*.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "install-hooks": "cp ./hooks/* ./.git/hooks/"
+    "install-hooks": "cp ./hooks/* ./.git/hooks/",
+    "jshint": "./node_modules/.bin/jshint -c .jshintrc lib/**/*.js"
   },
   "author": {
     "name": "DOM2WG",
@@ -44,7 +45,8 @@
     "mocha": "~1.21.4",
     "mocha-lcov-reporter": "0.0.1",
     "nodemon": "^1.2.1",
-    "sinon": "~1.10.3"
+    "sinon": "~1.10.3",
+    "jshint": "~2.5.6"
   },
   "dependencies": {
     "parse-attributes": "0.0.1"
