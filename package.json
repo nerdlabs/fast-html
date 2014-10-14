@@ -13,7 +13,7 @@
     "test-coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly test/test-*.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "install-hooks": "cp ./hooks/* ./.git/hooks/",
-    "jshint": "./node_modules/.bin/jshint -c .jshintrc lib/**/*.js"
+    "jshint": "find lib -name '*.js' | xargs ./node_modules/.bin/jshint -c .jshintrc"
   },
   "author": {
     "name": "DOM2WG",
