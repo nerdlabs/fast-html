@@ -49,6 +49,7 @@
     "jshint": "~2.5.6"
   },
   "dependencies": {
-    "parse-attributes": "0.0.1"
+    "parse-attributes": "0.0.1",
+    "jscs": "~1.7.1"
   }
 }
