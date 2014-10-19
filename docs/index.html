@@ -1,6 +1,6 @@
 <!doctype html>
 <head>
-    <title>fastHTML documentation</title>
+    <title>fast-html documentation</title>
 </head>
 <body>
     <section class="suite">
@@ -9,9 +9,11 @@
         <section class="suite">
           <h1>when called without any arguments</h1>
           <dl>
-            <dt>should return undefined</dt>
-            <dd><pre><code>var returnVal = parse();
-assert.equal(returnVal, undefined);</code></pre></dd>
+            <dt>should not execute any callbacks</dt>
+            <dd><pre><code>testParser.parser.parse();
+assert.isFalse(testParser.start.called);
+assert.isFalse(testParser.end.called);
+assert.isFalse(testParser.data.called);</code></pre></dd>
           </dl>
         </section>
       </dl>
@@ -20,180 +22,56 @@ assert.equal(returnVal, undefined);</code></pre></dd>
       <h1>Simple examples</h1>
       <dl>
         <section class="suite">
-          <h1>when called with empty string</h1>
-          <dl>
-            <dt>should return an empty root-node</dt>
-            <dd><pre><code>var returnVal = parse('', createElementNode, createTextNode);
-assert.equal(returnVal.tagName, null);
-assert.deepEqual(returnVal.attributes, {});
-assert.deepEqual(returnVal.childNodes, []);</code></pre></dd>
-          </dl>
-        </section>
-        <section class="suite">
           <h1>when called with string containing only a comment</h1>
           <dl>
-            <dt>should return an empty root-node</dt>
-            <dd><pre><code>var returnVal = parse('&lt;!-- foobar --&gt;', createElementNode, createTextNode);
-assert.equal(returnVal.tagName, null);
-assert.deepEqual(returnVal.attributes, {});
-assert.deepEqual(returnVal.childNodes, []);</code></pre></dd>
+            <dt>should not execute any callbacks</dt>
+            <dd><pre><code>var testParser = createTestParser();
+testParser.parser.parse('&lt;!-- foobar --&gt;');
+assert.isFalse(testParser.start.called);
+assert.isFalse(testParser.end.called);
+assert.isFalse(testParser.data.called);</code></pre></dd>
           </dl>
         </section>
         <section class="suite">
           <h1>when called with just one element</h1>
           <dl>
-            <dt>should parse the string and return the element as childNode of root-node</dt>
-            <dd><pre><code>assert.lengthOf(returnVal.childNodes, 1, 'create just one childNode');
-assert.equal(returnVal.childNodes[0].tagName, 'div');</code></pre></dd>
-            <dt>should have empty attributes and childNodes</dt>
-            <dd><pre><code>assert.deepEqual(returnVal.childNodes[0].attributes, {});
-assert.lengthOf(returnVal.childNodes[0].childNodes, 0);</code></pre></dd>
+            <dt>should execute start and end callbacks once</dt>
+            <dd><pre><code>assert.equal(testParser.start.callCount, 1);
+assert.equal(testParser.end.callCount, 1);</code></pre></dd>
+            <dt>should execute start callback with tagname</dt>
+            <dd><pre><code>assert.isTrue(testParser.start.calledWith('div'));</code></pre></dd>
           </dl>
         </section>
         <section class="suite">
           <h1>when called with just one element carrying attributes</h1>
           <dl>
-            <dt>should have a corresponding attribute object</dt>
-            <dd><pre><code>var returnVal = parse('&lt;div bar=&quot;foo&quot; foo=&quot;bar&quot; foobar&gt;&lt;/div&gt;', createElementNode, createTextNode);
-assert.deepEqual(returnVal.childNodes[0].attributes, { 'foo': 'bar' , 'bar': 'foo', 'foobar': true });</code></pre></dd>
+            <dt>should execute start callback with attribute string</dt>
+            <dd><pre><code>var testParser = createTestParser();
+testParser.parser.parse('&lt;div bar=&quot;foo&quot; foo=&quot;bar&quot; foobar&gt;&lt;/div&gt;');
+assert.equal(testParser.start.firstCall.args[1], 'bar=&quot;foo&quot; foo=&quot;bar&quot; foobar');</code></pre></dd>
           </dl>
         </section>
         <section class="suite">
           <h1>when called with just one element containing text</h1>
           <dl>
-            <dt>should return an element with one text childNode</dt>
-            <dd><pre><code>assert.lengthOf(returnVal.childNodes[0].childNodes, 1);
-assert.instanceOf(returnVal.childNodes[0].childNodes[0], TextNode);</code></pre></dd>
-            <dt>should return an element with one text childNode with corresponding contents</dt>
-            <dd><pre><code>assert.deepEqual(returnVal.childNodes[0].childNodes[0], new TextNode('foobar'));</code></pre></dd>
+            <dt>should execute data callback once</dt>
+            <dd><pre><code>assert.equal(testParser.data.callCount, 1);</code></pre></dd>
+            <dt>should pass text content to data callback</dt>
+            <dd><pre><code>assert.equal(testParser.data.firstCall.args[0], 'foobar');</code></pre></dd>
           </dl>
         </section>
         <section class="suite">
           <h1>when called with self-closing elements</h1>
           <dl>
-            <dt>should return an element with the same number of childNodes</dt>
-            <dd><pre><code>assert.lengthOf(returnVal.childNodes, Object.keys(elements.selfClosing).length);</code></pre></dd>
-            <dt>should return an element with a childNode for each passed childNode</dt>
-            <dd><pre><code>var returnedTagNames = returnVal.childNodes.map(function(childNode){
-    return childNode.tagName;
+            <dt>should not execute end callbacks</dt>
+            <dd><pre><code>assert.isFalse(testParser.end.called);</code></pre></dd>
+            <dt>should execute start callback once per element</dt>
+            <dd><pre><code>assert.equal(testParser.start.callCount, tagNames.length);</code></pre></dd>
+            <dt>should execute start callback with correct tag names</dt>
+            <dd><pre><code>var encounteredTags = testParser.start.args.map(function (args) {
+    return args[0];
 });
-assert.sameMembers(returnedTagNames, Object.keys(elements.selfClosing));</code></pre></dd>
-          </dl>
-        </section>
-      </dl>
-    </section>
-    <section class="suite">
-      <h1>camelCase utility</h1>
-      <dl>
-        <section class="suite">
-          <h1>when called with an empty string</h1>
-          <dl>
-            <dt>should return an empty string</dt>
-            <dd><pre><code>var returnVal = camelCase('');
-assert.equal(returnVal, '');</code></pre></dd>
-          </dl>
-        </section>
-        <section class="suite">
-          <h1>when called with a kebapcased string</h1>
-          <dl>
-            <section class="suite">
-              <h1>with one part</h1>
-              <dl>
-                <dt>should return the same string</dt>
-                <dd><pre><code>var returnVal = camelCase('kebap-');
-assert.equal(returnVal, 'kebap-');</code></pre></dd>
-              </dl>
-            </section>
-            <section class="suite">
-              <h1>with two parts</h1>
-              <dl>
-                <dt>should return a camelCased string</dt>
-                <dd><pre><code>var returnVal = camelCase('kebap-case-string');
-assert.equal(returnVal, 'kebapCaseString');</code></pre></dd>
-              </dl>
-            </section>
-            <section class="suite">
-              <h1>with n parts</h1>
-              <dl>
-                <dt>should return a camelCased string</dt>
-                <dd><pre><code>var returnVal = camelCase('kebap-case-string-kebap-case-string-kebap-case-string');
-assert.equal(returnVal, 'kebapCaseStringKebapCaseStringKebapCaseString');</code></pre></dd>
-              </dl>
-            </section>
-          </dl>
-        </section>
-        <section class="suite">
-          <h1>when called with a non-kepabcased string</h1>
-          <dl>
-            <dt>should return the same string</dt>
-            <dd><pre><code>var returnVal = camelCase('kebapcase');
-assert.equal(returnVal, 'kebapcase');</code></pre></dd>
-          </dl>
-        </section>
-      </dl>
-    </section>
-    <section class="suite">
-      <h1>getAttributes utility</h1>
-      <dl>
-        <section class="suite">
-          <h1>when called with an empty string</h1>
-          <dl>
-            <dt>should return an empty object</dt>
-            <dd><pre><code>var returnVal = getAttributes('');
-assert.deepEqual(returnVal, {});</code></pre></dd>
-          </dl>
-        </section>
-        <section class="suite">
-          <h1>when called with a string containing an empty attribute</h1>
-          <dl>
-            <dt>should return an object containing the attribute key with value `true`</dt>
-            <dd><pre><code>var returnVal = getAttributes('foo');
-assert.propertyVal(returnVal, 'foo', true);</code></pre></dd>
-          </dl>
-        </section>
-        <section class="suite">
-          <h1>when called with a string containing attributes</h1>
-          <dl>
-            <section class="suite">
-              <h1>without quotes</h1>
-              <dl>
-                <dt>should return an corresponding object</dt>
-                <dd><pre><code>var returnVal = getAttributes('foo=bar');
-assert.propertyVal(returnVal, 'foo', 'bar');</code></pre></dd>
-              </dl>
-            </section>
-            <section class="suite">
-              <h1>with single quotes</h1>
-              <dl>
-                <dt>should return an corresponding object</dt>
-                <dd><pre><code>var returnVal = getAttributes('foo=\'bar\'');
-assert.propertyVal(returnVal, 'foo', 'bar');</code></pre></dd>
-              </dl>
-            </section>
-            <section class="suite">
-              <h1>with double quotes</h1>
-              <dl>
-                <dt>should return an corresponding object</dt>
-                <dd><pre><code>var returnVal = getAttributes('foo=&quot;bar&quot;');
-assert.propertyVal(returnVal, 'foo', 'bar');</code></pre></dd>
-              </dl>
-            </section>
-            <section class="suite">
-              <h1>with spaces between delimeters</h1>
-              <dl>
-                <dt>should return an corresponding object</dt>
-                <dd><pre><code>var returnVal = getAttributes(' foo = &quot;bar&quot; ');
-assert.propertyVal(returnVal, 'foo', 'bar');</code></pre></dd>
-              </dl>
-            </section>
-            <section class="suite">
-              <h1>without spaces between delimeters</h1>
-              <dl>
-                <dt>should return an corresponding object</dt>
-                <dd><pre><code>var returnVal = getAttributes(' foo=&quot;bar&quot; ');
-assert.propertyVal(returnVal, 'foo', 'bar');</code></pre></dd>
-              </dl>
-            </section>
+assert.sameMembers(encounteredTags, tagNames);</code></pre></dd>
           </dl>
         </section>
       </dl>
