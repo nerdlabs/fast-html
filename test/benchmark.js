@@ -1,11 +1,9 @@
-var parse = require('../');
-var createElement = require('./lib/createElementNode');
-var createTextNode = require('./lib/createTextNode');
+var parser = require('../')();
 
 var benchmark = require('htmlparser-benchmark');
 
 var bench = benchmark(function (html, callback) {
-    parse(html, createElement, createTextNode);
+    parser.parse(html);
     callback();
 });
 

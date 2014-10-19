@@ -1,6 +1,4 @@
-var parse = require('../');
-var createElement = require('./lib/createElementNode');
-var createTextNode = require('./lib/createTextNode');
+var parser = require('../')();
 
 var optimizationStatusMessages = [
     'undefined behaviour',
@@ -20,14 +18,14 @@ function getOptimizationStatus(fn) {
 }
 
 //Fill type-info
-parse('<div></div>', createElement, createTextNode);
+parser.parse('<div></div>');
 
-%OptimizeFunctionOnNextCall(parse);
+%OptimizeFunctionOnNextCall(parser.parse);
 //The next call
-parse('<div></div>', createElement, createTextNode);
+parser.parse('<div></div>');
 
 //Check
-var status = getOptimizationStatus(parse);
+var status = getOptimizationStatus(parser.parse);
 console.log(status.message);
 
 if (status.status !== 1 && status.status !== 3) {
