@@ -1,5 +1,5 @@
 {
-  "name": "fasthtml",
+  "name": "fast-html",
   "version": "0.1.0",
   "description": "Fast HTML parser. Based on ashi009's fast-html-parser.",
   "main": "lib/index.js",
@@ -32,10 +32,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com:nerdlabs/fastHTML.git"
+    "url": "git://github.com:nerdlabs/fast-html.git"
   },
   "bugs": {
-    "url": "https://github.com/nerdlabs/fastHTML/issues"
+    "url": "https://github.com/nerdlabs/fast-html/issues"
   },
   "license": "MIT",
   "devDependencies": {

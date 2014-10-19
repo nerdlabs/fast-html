@@ -1,11 +1,11 @@
-# FastHTML [![Build Status][3]][4] [![Coverage Status][5]][6]
-FastHTML is a sax-style HTML parser focused on performance. It only copes with sane HTML - see the [Things that break](#things-that-break) section.
+# fast-html [![Build Status][3]][4] [![Coverage Status][5]][6]
+fast-html is a sax-style HTML parser focused on performance. It only copes with sane HTML - see the [Things that break](#things-that-break) section.
 
 
 ## Install
 
 ```shell
-npm install --save fasthtml
+npm install --save fast-html
 ```
 
 ## Docs
@@ -14,7 +14,7 @@ npm install --save fasthtml
 ## Usage
 
 ```
-var fastHtml = require('fasthtml')({ parseAttributes: true });
+var fastHtml = require('fast-html')({ parseAttributes: true });
 
 // Receive start tags
 fastHtml.on('start', function(tagName, attributes){
@@ -48,9 +48,9 @@ FastHTML is designed for maximum performance, therefore it will not
 * `</script>` strings in inline `script` - Use `<![CDATA[...]]>`.
 * HTML strings in attributes - Escape them.
 
-[3]: https://travis-ci.org/nerdlabs/fastHTML.svg?branch=master
-[4]: https://travis-ci.org/nerdlabs/fastHTML
-[5]: https://img.shields.io/coveralls/nerdlabs/fastHTML.svg
-[6]: https://coveralls.io/r/nerdlabs/fastHTML
-[7]: http://nerdlabs.github.io/fastHTML/docs/
+[3]: https://travis-ci.org/nerdlabs/fast-html.svg?branch=master
+[4]: https://travis-ci.org/nerdlabs/fast-html
+[5]: https://img.shields.io/coveralls/nerdlabs/fast-html.svg
+[6]: https://coveralls.io/r/nerdlabs/fast-html
+[7]: http://nerdlabs.github.io/fast-html/docs/
 [8]: http://visionmedia.github.io/mocha/
