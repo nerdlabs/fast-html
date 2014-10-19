@@ -23,7 +23,6 @@
         "beforeOpeningCurlyBrace": true
     },
     "disallowSpacesInCallExpression": true,
-    "requireMultipleVarDecl": true,
     "requireBlocksOnNewline": true,
     "disallowEmptyBlocks": true,
     "disallowSpacesInsideArrayBrackets": true,
