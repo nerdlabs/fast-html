@@ -98,4 +98,22 @@ describe('Simple examples', function () {
         });
     });
 
+    describe('when called with script/style element', function () {
+        var testParser = null;
+
+        beforeEach(function () {
+            testParser = createTestParser();
+        });
+
+        it('should execute the data callback with the entire style content', function () {
+            testParser.parser.parse('<style>body{font-size:16px;}h1{color:red;}</style>');
+            assert.equal(testParser.data.firstCall.args[0], 'body{font-size:16px;}h1{color:red;}');
+        });
+
+        it('should not break when markup is present in script tags', function () {
+            testParser.parser.parse('<script>var a="<p>test</p>";alert(a);</script>');
+            assert.equal(testParser.data.firstCall.args[0], 'var a="<p>test</p>";alert(a);');
+        });
+    });
+
 });
