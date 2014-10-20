@@ -116,4 +116,17 @@ describe('Simple examples', function () {
         });
     });
 
+    describe('when instantiated with parseAttributes=true', function () {
+        it('should execute start callback with arguments parsed as object', function () {
+            var testParser = createTestParser({ parseAttributes: true });
+            testParser.parser.parse('<div id="foo" class="bar baz" foo-bar-baz="baz"></div>');
+            var attrs = {
+                id: 'foo',
+                class: 'bar baz',
+                fooBarBaz: 'baz'
+            };
+            assert.deepEqual(testParser.start.firstCall.args[1], attrs);
+        });
+    });
+
 });
