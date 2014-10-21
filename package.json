@@ -51,6 +51,7 @@
     "jscs": "~1.7.1"
   },
   "dependencies": {
-    "parse-attributes": "0.0.1"
+    "parse-attributes": "0.0.1",
+    "small-eventemitter": "^1.0.0"
   }
 }
