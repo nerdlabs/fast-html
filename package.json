@@ -1,6 +1,6 @@
 {
   "name": "fast-html",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Fast HTML parser. Based on ashi009's fast-html-parser.",
   "main": "lib/index.js",
   "scripts": {
