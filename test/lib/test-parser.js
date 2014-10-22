@@ -2,8 +2,8 @@ var sinon = require('sinon');
 var createParser = require('../../');
 
 
-module.exports = function () {
-    var parser = createParser();
+module.exports = function (options) {
+    var parser = createParser(options);
 
     var onStart = sinon.spy();
     var onEnd = sinon.spy();
