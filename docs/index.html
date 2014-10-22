@@ -74,6 +74,31 @@ assert.equal(testParser.start.firstCall.args[1], 'bar=&quot;foo&quot; foo=&quot;
 assert.sameMembers(encounteredTags, tagNames);</code></pre></dd>
           </dl>
         </section>
+        <section class="suite">
+          <h1>when called with script/style element</h1>
+          <dl>
+            <dt>should execute the data callback with the entire style content</dt>
+            <dd><pre><code>testParser.parser.parse('&lt;style&gt;body{font-size:16px;}h1{color:red;}&lt;/style&gt;');
+assert.equal(testParser.data.firstCall.args[0], 'body{font-size:16px;}h1{color:red;}');</code></pre></dd>
+            <dt>should not break when markup is present in script tags</dt>
+            <dd><pre><code>testParser.parser.parse('&lt;script&gt;var a=&quot;&lt;p&gt;test&lt;/p&gt;&quot;;alert(a);&lt;/script&gt;');
+assert.equal(testParser.data.firstCall.args[0], 'var a=&quot;&lt;p&gt;test&lt;/p&gt;&quot;;alert(a);');</code></pre></dd>
+          </dl>
+        </section>
+        <section class="suite">
+          <h1>when instantiated with parseAttributes=true</h1>
+          <dl>
+            <dt>should execute start callback with arguments parsed as object</dt>
+            <dd><pre><code>var testParser = createTestParser({ parseAttributes: true });
+testParser.parser.parse('&lt;div id=&quot;foo&quot; class=&quot;bar baz&quot; foo-bar-baz=&quot;baz&quot;&gt;&lt;/div&gt;');
+var attrs = {
+    id: 'foo',
+    class: 'bar baz',
+    fooBarBaz: 'baz'
+};
+assert.deepEqual(testParser.start.firstCall.args[1], attrs);</code></pre></dd>
+          </dl>
+        </section>
       </dl>
     </section>
 </body>
