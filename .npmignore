@@ -10,3 +10,4 @@ test
 .nodemonrc
 .travis.yml
 *.sublime-*
+test.js
