@@ -13,7 +13,7 @@ npm install --save fast-html
 
 ## Usage
 
-```
+```js
 var fastHtml = require('fast-html')({ parseAttributes: true });
 
 // Receive start tags
