@@ -4,17 +4,17 @@
   "description": "Fast HTML parser. Based on ashi009's fast-html-parser.",
   "main": "lib/index.js",
   "scripts": {
-    "watch": "./node_modules/.bin/nodemon --exec \"npm run test-spec\"",
+    "watch": "nodemon --exec \"npm run test-spec\"",
     "test": "npm run test-spec && npm run test-optimized && npm run test-benchmark && npm run test-coverage && npm run jshint && npm run jscs",
-    "test-spec": "./node_modules/.bin/mocha test/test-*.js",
-    "test-doc": "./node_modules/.bin/mocha -R doc test/test-*.js | cat docs/_begin.html - docs/_end.html > docs/index.html",
+    "test-spec": "mocha test/test-*.js",
+    "test-doc": "mocha -R doc test/test-*.js | cat docs/_begin.html - docs/_end.html > docs/index.html",
     "test-optimized": "node --trace_opt --trace_deopt --allow-natives-syntax test/optimized.js",
     "test-benchmark": "node test/benchmark.js",
-    "test-coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly test/test-*.js",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test-coverage": "istanbul cover _mocha --report lcovonly test/test-*.js",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "install-hooks": "cp ./hooks/* ./.git/hooks/",
-    "jshint": "find lib -name '*.js' | xargs ./node_modules/.bin/jshint -c .jshintrc",
-    "jscs": "./node_modules/.bin/jscs --config .jscsrc lib/"
+    "jshint": "find lib -name '*.js' | xargs jshint -c .jshintrc",
+    "jscs": "jscs --config .jscsrc lib/"
   },
   "author": {
     "name": "DOM2WG",
