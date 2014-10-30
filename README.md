@@ -48,7 +48,7 @@ FastHTML is designed for maximum performance, therefore it will not
 * `</script>` strings in inline `script` - Use `<![CDATA[...]]>`.
 * HTML strings in attributes - Escape them.
 
-[3]: https://travis-ci.org/nerdlabs/fast-html.svg?branch=master
+[3]: https://img.shields.io/travis/nerdlabs/fast-html.svg
 [4]: https://travis-ci.org/nerdlabs/fast-html
 [5]: https://img.shields.io/coveralls/nerdlabs/fast-html.svg
 [6]: https://coveralls.io/r/nerdlabs/fast-html
