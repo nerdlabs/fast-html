@@ -53,4 +53,4 @@ FastHTML is designed for maximum performance, therefore it will not
 [5]: https://img.shields.io/coveralls/nerdlabs/fast-html.svg
 [6]: https://coveralls.io/r/nerdlabs/fast-html
 [7]: http://nerdlabs.github.io/fast-html/docs/
-[8]: http://visionmedia.github.io/mocha/
+[8]: http://mochajs.org/
